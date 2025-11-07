@@ -1,42 +1,23 @@
+const key = ""; // <-- your OpenWeatherMap API key
+const $ = id => document.getElementById(id);
+const ctx = $("chart").getContext("2d");
 
-const API_KEY = "";  // <-- replace with your OpenWeatherMap key
-const btn = document.getElementById("btn");
-const cityInput = document.getElementById("city");
-const ctx = document.getElementById("chart").getContext("2d");
+$("btn").onclick = async () => {
+  const city = $("city").value.trim();
+  if (!city) return alert("Enter a city!");
 
-btn.addEventListener("click", () => getWeather(cityInput.value, showWeather));
-
-
-const getWeather = async (city, callback) => {
-  if(!city) return alert("Enter a city!");
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`;
-  
   try {
-    const res = await fetch(url);          // Promise
-    const data = await res.json();         // Await
-    callback(data);                        // Callback
-  } catch (err) {
-    alert("Error fetching data");
-  }
-};
+    const r = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${key}`);
+    const d = await r.json();
+    if (d.cod !== "200") return alert("City not found!");
 
-const showWeather = (data) => {
-  if(data.cod !== "200") return alert("City not found!");
-
-  const labels = data.list.slice(0,5).map(x => x.dt_txt.split(" ")[1]);
-  const temps = data.list.slice(0,5).map(x => x.main.temp);
-
-  new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: labels,
-      datasets: [{ 
-        label: `Temp in ${data.city.name} (°C)`, 
-        data: temps, 
-        borderColor: "blue", 
-        fill: false 
-      }]
-    },
-    options: { responsive: true, scales: { y: { beginAtZero: false } } }
-  });
+    const t = d.list.slice(0,5);
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: t.map(x => x.dt_txt.split(" ")[1]),
+        datasets: [{ label: `Temp in ${d.city.name} (°C)`, data: t.map(x => x.main.temp), borderColor: "blue" }]
+      }
+    });
+  } catch { alert("Error fetching data"); }
 };
