@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="bookstore.xsd">
+  
+  <book category="FICTION">
+    <title>The Great Gatsby</title>
+    <author>F. Scott Fitzgerald</author>
+    <price>10.99</price>
+  </book>
+  
+  <book category="CHILDREN">
+    <title>Harry Potter</title>
+    <author>J.K. Rowling</author>
+    <price>10.00</price>
+  </book>
+  
+</bookstore>
