@@ -1,32 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-<xs:element name="bookstore">
-  <xs:complexType>
-    <xs:sequence>
-      
-      <xs:element name="book" minOccurs="1" maxOccurs="unbounded">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="title" type="xs:string" />
-            <xs:element name="author" type="xs:string" />
-            <xs:element name="price" type="xs:decimal" />
-          </xs:sequence>
-          
-          <xs:attribute name="category" use="required">
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:enumeration value="FICTION" />
-                <xs:enumeration value="CHILDREN" />
-                <xs:enumeration value="WEB" />
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:attribute>
-        </xs:complexType>
-      </xs:element>
-      
-    </xs:sequence>
-  </xs:complexType>
-</xs:element>
+  <xs:element name="bookstore">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="book" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="title" type="xs:string"/>
+              <xs:element name="author" type="xs:string"/>
+              <xs:element name="price" type="xs:decimal"/>
+            </xs:sequence>
+            <xs:attribute name="category" use="required"
+              type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 
 </xs:schema>
