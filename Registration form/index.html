@@ -1,46 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tiny Shop</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Simple Cart with Login</title>
+  <style>
+    body { text-align:center; font-family:sans-serif; }
+    .item { border:1px solid #aaa; display:inline-block; margin:5px; padding:10px; width:120px; }
+  </style>
 </head>
 <body>
-<h1>Tiny Shop</h1>
+  <h3>🛒 Simple Cart</h3>
 
-<!-- Registration -->
-<section id="register">
-  <h2>Register</h2>
-  <input id="newUser" placeholder="Username">
-  <input id="newPass" type="password" placeholder="Password">
-  <button onclick="register()">Register</button>
-  <p><a href="#" onclick="show('login')">Go to Login</a></p>
-</section>
+  <!-- Register -->
+  <div id="reg">
+    <h4>Register</h4>
+    <input id="rUser" placeholder="Username"><br>
+    <input id="rPass" type="password" placeholder="Password"><br><br>
+    <button onclick="register()">Register</button>
+  </div>
 
-<!-- Login -->
-<section id="login" class="hide">
-  <h2>Login</h2>
-  <input id="user" placeholder="Username">
-  <input id="pass" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-</section>
+  <!-- Login -->
+  <div id="log" style="display:none;">
+    <h4>Login</h4>
+    <input id="lUser" placeholder="Username"><br>
+    <input id="lPass" type="password" placeholder="Password"><br><br>
+    <button onclick="login()">Login</button>
+  </div>
 
-<!-- Catalog -->
-<section id="catalog" class="hide">
-  <h2>Catalog</h2>
-  <div class="grid" id="products"></div>
-  <button onclick="showCart()">Go to Cart (<span id="count">0</span>)</button>
-</section>
+  <!-- Cart -->
+  <div id="cart" style="display:none;">
+    <h4>Welcome <span id="user"></span>!</h4>
+    <div class="item">
+      <h5>Apple</h5><p>₹30</p>
+      <button onclick="add('Apple',30)">Add</button>
+    </div>
+    <div class="item">
+      <h5>Banana</h5><p>₹10</p>
+      <button onclick="add('Banana',10)">Add</button>
+    </div>
+    <h4>Total: ₹<span id="total">0</span></h4>
+    <ul id="items" style="list-style:none;padding:0;"></ul>
+  </div>
 
-<!-- Cart -->
-<section id="cart" class="hide">
-  <h2>Your Cart</h2>
-  <div id="items"></div>
-  <p id="total"></p>
-  <button onclick="show('catalog')">Back</button>
-</section>
-
-<script src="script.js"></script>
+  <script>
+    let u="", p="", total=0;
+    function register(){
+      u=document.getElementById("rUser").value;
+      p=document.getElementById("rPass").value;
+      if(u && p){ alert("Registered!");
+        document.getElementById("reg").style.display="none";
+        document.getElementById("log").style.display="block";
+      }
+    }
+    function login(){
+      if(document.getElementById("lUser").value===u && 
+         document.getElementById("lPass").value===p){
+        document.getElementById("log").style.display="none";
+        document.getElementById("cart").style.display="block";
+        document.getElementById("user").textContent=u;
+      } else alert("Invalid!");
+    }
+    function add(n,pr){
+      total+=pr;
+      document.getElementById("total").textContent=total;
+      const li=document.createElement("li");
+      li.textContent=`${n} - ₹${pr}`;
+      document.getElementById("items").appendChild(li);
+    }
+  </script>
 </body>
 </html>
