@@ -1,48 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tiny Shop (with Validation)</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<h1>Tiny Shop</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Registration</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="box">
+      <h3>Register</h3>
 
-<!-- Registration -->
-<section id="register">
-  <h2>Register</h2>
-  <input id="newUser" placeholder="Username">
-  <input id="newPass" type="password" placeholder="Password">
-  <button onclick="register()">Register</button>
-  <p><a href="#" onclick="show('login')">Go to Login</a></p>
-  <p id="regMsg" class="msg"></p>
-</section>
+      <input type="text" id="name" placeholder="Full Name" />
+      <small id="nameErr"></small>
 
-<!-- Login -->
-<section id="login" class="hide">
-  <h2>Login</h2>
-  <input id="user" placeholder="Username">
-  <input id="pass" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p id="logMsg" class="msg"></p>
-</section>
+      <input type="email" id="email" placeholder="Email" />
+      <small id="emailErr"></small>
 
-<!-- Catalog -->
-<section id="catalog" class="hide">
-  <h2>Catalog</h2>
-  <div class="grid" id="products"></div>
-  <button onclick="showCart()">Go to Cart (<span id="count">0</span>)</button>
-</section>
+      <input type="password" id="password" placeholder="Password" />
+      <small id="passErr"></small>
 
-<!-- Cart -->
-<section id="cart" class="hide">
-  <h2>Your Cart</h2>
-  <div id="items"></div>
-  <p id="total"></p>
-  <button onclick="show('catalog')">Back</button>
-</section>
+      <input type="password" id="confirm" placeholder="Confirm Password" />
+      <small id="confirmErr"></small>
 
-<script src="script.js"></script>
-</body>
+      <button onclick="validate()">Register</button>
+      <script src="script.js"></script>
+    </div>
+  </body>
 </html>
