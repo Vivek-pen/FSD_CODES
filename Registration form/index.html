@@ -3,48 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <title>Simple Cart with Login</title>
-
     <style>
       body {
         text-align: center;
         font-family: sans-serif;
-        margin: 0;
-        padding: 20px;
       }
-
-      /* GRID for product items */
-      .items-grid {
-        align-items: center;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-top: 20px;
-        padding: 10px;
-      }
-
       .item {
         border: 1px solid #aaa;
+        display: inline-block;
+        margin: 5px;
         padding: 10px;
-        border-radius: 10px;
-        background: #fafafa;
-      }
-
-      /* FLEXBOX for cart items */
-      #items li {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      @media (max-width: 600px) {
-        body {
-          padding: 10px;
-        }
+        width: 120px;
       }
     </style>
   </head>
-
   <body>
     <h3>Simple Cart</h3>
 
@@ -62,69 +34,25 @@
       <button onclick="login()">Login</button>
     </div>
 
-    <div id="cart" style="display: block">
+    <div id="cart" style="display: none">
       <h4>Welcome <span id="user"></span>!</h4>
-
-      <!-- GRID APPLIED HERE -->
-      <div class="items-grid">
-        <div class="item">
-          <h5>Apple</h5>
-          <p>₹30</p>
-          <button onclick="add('Apple', 30)">Add</button>
-        </div>
-
-        <div class="item">
-          <h5>Banana</h5>
-          <p>₹10</p>
-          <button onclick="add('Banana', 10)">Add</button>
-        </div>
-        <div class="item">
-          <h5>Banana</h5>
-          <p>₹10</p>
-          <button onclick="add('Banana', 10)">Add</button>
-        </div>
-        <div class="item">
-          <h5>Banana</h5>
-          <p>₹10</p>
-          <button onclick="add('Banana', 10)">Add</button>
-        </div>
-        <div class="item">
-          <h5>Banana</h5>
-          <p>₹10</p>
-          <button onclick="add('Banana', 10)">Add</button>
-        </div>
-        <div class="item">
-          <h5>Banana</h5>
-          <p>₹10</p>
-          <button onclick="add('Banana', 10)">Add</button>
-        </div>
-        <div class="item">
-          <h5>Banana</h5>
-          <p>₹10</p>
-          <button onclick="add('Banana', 10)">Add</button>
-        </div>
-        <div class="item">
-          <h5>Banana</h5>
-          <p>₹10</p>
-          <button onclick="add('Banana', 10)">Add</button>
-        </div>
-        <div class="item">
-          <h5>Banana</h5>
-          <p>₹10</p>
-          <button onclick="add('Banana', 10)">Add</button>
-        </div>
-
+      <div class="item">
+        <h5>Apple</h5>
+        <p>₹30</p>
+        <button onclick="add('Apple',30)">Add</button>
       </div>
-
+      <div class="item">
+        <h5>Banana</h5>
+        <p>₹10</p>
+        <button onclick="add('Banana',10)">Add</button>
+      </div>
       <h4>Total: ₹<span id="total">0</span></h4>
-
-      <!-- FLEXBOX APPLIED TO THE LI ELEMENTS -->
       <ul id="items" style="list-style: none; padding: 0"></ul>
     </div>
 
     <script>
-      let u = "", p = "", total = 0;
-
+      let u = "", p = "",total = 0;
+      
       function register() {
         u = document.getElementById("rUser").value;
         p = document.getElementById("rPass").value;
@@ -134,24 +62,21 @@
           document.getElementById("log").style.display = "block";
         }
       }
-
+      
       function login() {
-        if (
-          document.getElementById("lUser").value === u &&
-          document.getElementById("lPass").value === p
-        ) {
+        if (document.getElementById("lUser").value === u && document.getElementById("lPass").value === p){
           document.getElementById("log").style.display = "none";
           document.getElementById("cart").style.display = "block";
           document.getElementById("user").textContent = u;
-        } else alert("Invalid!");
+        } 
+        else alert("Invalid!");
       }
-
+      
       function add(n, pr) {
         total += pr;
         document.getElementById("total").textContent = total;
-
         const li = document.createElement("li");
-        li.textContent = n + " - ₹" + pr;
+        li.textContent = `${n} - ₹${pr}`;
         document.getElementById("items").appendChild(li);
       }
     </script>
