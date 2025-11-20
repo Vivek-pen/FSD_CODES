@@ -20,7 +20,8 @@ public class AppController extends HttpServlet {
 
         if (type.equals("register")) {
             registerUser(req, out);
-        } else if (type.equals("login")) {
+        }
+        else if (type.equals("login")) {
             loginUser(req, out);
         }
     }
